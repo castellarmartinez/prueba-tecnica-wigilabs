@@ -24,6 +24,11 @@ export const httpStatusCodes = {
     code: "DATA_NOT_FOUND",
     message: "Resource not found.",
   },
+  CONFLICT: {
+    httpCode: 409,
+    code: "CONFLICT",
+    message: "Resource already created",
+  },
   INTERNAL_ERROR: {
     httpCode: 500,
     code: "UNCONTROLLED_ERROR",

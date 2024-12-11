@@ -4,7 +4,7 @@ import { httpStatusCodes } from "../../utils/constants";
 import { saveUser } from "../../models/users-model";
 
 
-export async function httpAddUser(
+export async function addUser(
   req: Request,
   res: Response,
   next: NextFunction

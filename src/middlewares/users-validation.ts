@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { NextFunction, Request, Response } from "express";
 import { httpStatusCodes } from "../utils/constants";
+import { Users } from "../models/users-mongo";
 
 const UserSchema = Joi.object({
   name: Joi.string()
@@ -25,7 +26,7 @@ const UserSchema = Joi.object({
   phone: Joi.number().min(1000000).max(999999999999).required(),
 });
 
-export async function validateUser(
+export async function validateUserFields(
   req: Request,
   res: Response,
   next: NextFunction
@@ -40,6 +41,35 @@ export async function validateUser(
   }
 }
 
+export async function validateExistingUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> {
+  try {
+    const emailTaken = await Users.findOne({ email: req.body.email });
+    const usernameTaken = await Users.findOne({ username: req.body.username });
+
+    if (emailTaken) {
+      return res.status(httpStatusCodes.CONFLICT.httpCode).json({
+        error: "Email already in use.",
+      });
+    }
+
+    if (usernameTaken) {
+      return res.status(httpStatusCodes.CONFLICT.httpCode).json({
+        error: "Username already in use.",
+      });
+    }
+
+    return next();
+  } catch (error) {
+    return res.status(httpStatusCodes.BAD_REQUEST.httpCode).json({
+      error: "Unexpected error in user registration. Try again later.",
+    });
+  }
+}
+
 function invalidUser(error: unknown) {
   if (
     typeof error === "object" &&
@@ -50,7 +80,7 @@ function invalidUser(error: unknown) {
     return invalidFieldsError(error.message);
   }
 
-  return "Unexpected error, try again later.";
+  return "Unexpected error in user registration. Try again later.";
 }
 
 function invalidFieldsError(message: string) {
@@ -66,9 +96,7 @@ function invalidFieldsError(message: string) {
   }
 
   if (message.includes('"password"')) {
-    return (
-      "You must enter a 'password' with a length between 6-32 characters."
-    );
+    return "You must enter a 'password' with a length between 6-32 characters.";
   }
 
   if (message.includes('"username"')) {
