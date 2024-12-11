@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { logger } from "../../utils/logger";
 import { httpStatusCodes } from "../../utils/constants";
+import { saveUser } from "../../models/users-model";
 
 
 export async function httpAddUser(
@@ -9,7 +10,8 @@ export async function httpAddUser(
   next: NextFunction
 ): Promise<any> {
   try {
-    logger.info(`Body received: ${JSON.stringify(req.body)}`);
+    logger.info(`Trying to register user: ${JSON.stringify(req.body)}`);
+    saveUser(req.body);
     return res
       .status(httpStatusCodes.SUCCESSFUL_OPERATION.httpCode)
       .json({ ok: true });

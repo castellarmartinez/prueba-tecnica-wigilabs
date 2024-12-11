@@ -4,6 +4,7 @@ import { config } from "dotenv";
 
 import { app } from "./src/app";
 import { logger } from "./src/utils/logger";
+import { connectToDatabase } from "./src/services/mogodb";
 
 
 config({ path: ".env" });
@@ -15,7 +16,7 @@ const server = http.createServer(app);
 
 async function startServer() {
   try {
-    //await connectToDatabase();
+    await connectToDatabase();
   } catch (error) {
     logger.error("Error while trying to start the server:", error);
   }
