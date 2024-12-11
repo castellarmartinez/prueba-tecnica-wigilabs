@@ -19,6 +19,7 @@
   "homepage": "https://github.com/castellarmartinez/prueba-tecnica-wigilabs#readme",
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.2",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
@@ -30,6 +31,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
     "winston": "^3.11.0"
   }

@@ -7,6 +7,7 @@ interface IUser {
   username: string;
   password: string;
   phone: number;
+  token?: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -29,6 +30,10 @@ const userSchema = new Schema<IUser>({
   phone: {
     type: Number,
     required: true,
+  },
+  token: {
+    type: String,
+    required: false,
   },
 });
 
