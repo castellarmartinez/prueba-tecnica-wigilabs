@@ -6,7 +6,6 @@ import { app } from "./src/app";
 import { logger } from "./src/utils/logger";
 import { connectToDatabase } from "./src/services/mogodb";
 
-
 config({ path: ".env" });
 
 const DEFAULT_PORT = 3000;
