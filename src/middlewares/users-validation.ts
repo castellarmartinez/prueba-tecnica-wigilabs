@@ -38,7 +38,7 @@ const loginSchema = Joi.object({
     })
     .required(),
 
-  password: Joi.string().min(6).max(32).required(),
+  password: Joi.string().required(),
 });
 
 export async function validateUserFields(
