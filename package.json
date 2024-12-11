@@ -1,0 +1,32 @@
+{
+  "name": "prueba-tecnica-wigilabs",
+  "version": "0.0.1",
+  "description": "Este proyecto es una api básica de nodejs dónde se implementan el creado de usuarios y el login de los mismos.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/castellarmartinez/prueba-tecnica-wigilabs.git"
+  },
+  "author": "David Castellar Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/castellarmartinez/prueba-tecnica-wigilabs/issues"
+  },
+  "homepage": "https://github.com/castellarmartinez/prueba-tecnica-wigilabs#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "winston": "^3.11.0"
+  }
+}
