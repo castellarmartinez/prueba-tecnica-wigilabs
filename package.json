@@ -4,6 +4,8 @@
   "description": "Este proyecto es una api básica de nodejs dónde se implementan el creado de usuarios y el login de los mismos.",
   "main": "server.js",
   "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
     "dev": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,16 +20,21 @@
   },
   "homepage": "https://github.com/castellarmartinez/prueba-tecnica-wigilabs#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.2",
     "nodemon": "^3.1.7",
+    "swagger-autogen": "^2.23.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
     "winston": "^3.11.0"
   }
