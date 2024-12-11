@@ -11,6 +11,7 @@ export async function register(
   try {
     logger.info(`Trying to register user: ${JSON.stringify(req.body)}`);
     saveUser(req.body);
+
     return res
       .status(httpStatusCodes.SUCCESSFUL_OPERATION.httpCode)
       .json({ ok: true });
@@ -26,7 +27,8 @@ export async function login(
 ): Promise<any> {
   try {
     logger.info(`Trying to log in user: ${JSON.stringify(req.body)}`);
-    const token = getAuthToken(req.body);
+    const token = await getAuthToken(req.body);
+
     return res
       .status(httpStatusCodes.SUCCESSFUL_OPERATION.httpCode)
       .json({ message: "You are now logged in.", token });
