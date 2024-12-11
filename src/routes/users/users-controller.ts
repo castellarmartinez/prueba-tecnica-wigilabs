@@ -9,7 +9,6 @@ export async function register(
   next: NextFunction
 ): Promise<any> {
   try {
-    logger.info(`Trying to register user: ${JSON.stringify(req.body)}`);
     saveUser(req.body);
 
     return res
@@ -26,7 +25,6 @@ export async function login(
   next: NextFunction
 ): Promise<any> {
   try {
-    logger.info(`Trying to log in user: ${JSON.stringify(req.body)}`);
     const token = await getAuthToken(req.body);
 
     return res
