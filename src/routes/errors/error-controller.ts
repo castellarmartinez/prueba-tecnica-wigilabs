@@ -9,12 +9,11 @@ export function errorHandler(
   _next: NextFunction
 ) {
   if (err instanceof HttpException) {
-    return res
-      .status(err.status)
-      .json({ error: err.message });
+    res.status(err.status).json({ error: err.message });
+    return;
   }
 
-  return res
+  res
     .status(httpStatusCodes.INTERNAL_ERROR.httpCode)
     .json({ error: httpStatusCodes.INTERNAL_ERROR.message });
 }
