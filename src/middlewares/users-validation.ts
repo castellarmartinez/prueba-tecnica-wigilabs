@@ -79,7 +79,7 @@ export async function validateExistingUser(
 
     return next();
   } catch (error) {
-    return res.status(httpStatusCodes.BAD_REQUEST.httpCode).json({
+    return res.status(httpStatusCodes.INTERNAL_ERROR.httpCode).json({
       error: "Unexpected error in user registration. Try again later.",
     });
   }
@@ -95,7 +95,7 @@ export async function validateCredentials(
     const user = await Users.findOne({ email });
 
     if (!user) {
-      return res.status(httpStatusCodes.BAD_REQUEST.httpCode).json({
+      return res.status(httpStatusCodes.UNAUTHORIZED.httpCode).json({
         error: "No user registered with that email.",
       });
     }
@@ -103,7 +103,7 @@ export async function validateCredentials(
     const matchPassword = bcrypt.compareSync(password, user.password);
 
     if (!matchPassword) {
-      return res.status(httpStatusCodes.BAD_REQUEST.httpCode).json({
+      return res.status(httpStatusCodes.UNAUTHORIZED.httpCode).json({
         error: "The password you entered is incorrect.",
       });
     }
