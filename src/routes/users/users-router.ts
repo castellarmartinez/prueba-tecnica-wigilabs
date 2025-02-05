@@ -5,10 +5,11 @@ import {
   validateCredentials,
   validateExistingUser,
   validateLoginFields,
+  validateUserFields,
 } from "../../middlewares/users-validation";
 
 export const usersRouter = express.Router();
 
 usersRouter
-  .post("/register", validateLoginFields, validateExistingUser, register)
+  .post("/register", validateUserFields, validateExistingUser, register)
   .post("/login", validateLoginFields, validateCredentials, login);
