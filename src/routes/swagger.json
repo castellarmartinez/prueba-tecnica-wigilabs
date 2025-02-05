@@ -1,0 +1,260 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Wigilabs Technical Assignment",
+    "description": "I need to update the description",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "contact": {
+      "email": "castellardav@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/users",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "headers",
+      "name": "authorization"
+    }
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "Create new user",
+        "tags": ["Users"],
+        "description": "Create a new user in the system",
+        "requestBody": {
+          "description": "Register user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/User/created"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/User/badRequest"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Resource already created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/User/conflict"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/internalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "summary": "Login user",
+        "tags": ["Users"],
+        "description": "Login an user into the system",
+        "requestBody": {
+          "description": "Access to a user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/Login/success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/Login/badRequest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/Login/unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responseBodies/internalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Francisco"
+          },
+          "email": {
+            "type": "string",
+            "example": "francisco@santander.com.co"
+          },
+          "username": {
+            "type": "string",
+            "example": "franpaula"
+          },
+          "password": {
+            "type": "string",
+            "example": "ElHombreDeLasLeyes$1819"
+          },
+          "phone": {
+            "type": "number",
+            "fromat": "int64",
+            "example": 6012223333
+          }
+        }
+      },
+      "Login": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "francisco@santander.com.co"
+          },
+          "password": {
+            "type": "string",
+            "example": "ElHombreDeLasLeyes$1819"
+          }
+        }
+      }
+    },
+    "responseBodies": {
+      "User": {
+        "created": {
+          "properties": {
+            "ok": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "badRequest": {
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "You must enter a 'name' with a length between 3-32 characters and only containing letters and spaces."
+            }
+          }
+        },
+        "conflict": {
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "Email already in use."
+            }
+          }
+        }
+      },
+      "Login": {
+        "success": {
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "You are now logged in."
+            },
+            "token": {
+              "type": "string",
+              "example": "JWT"
+            }
+          }
+        },
+        "badRequest": {
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "You must enter the user 'email'."
+            }
+          }
+        },
+        "unauthorized": {
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "The password you entered is incorrect."
+            }
+          }
+        }
+      },
+      "internalError": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Internal Server Error."
+          }
+        }
+      }
+    }
+  }
+}
